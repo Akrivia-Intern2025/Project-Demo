@@ -1,0 +1,65 @@
+<!-- <div class="centered-container">
+  <hr>
+  <div class="header-container">
+    <h1>Welcome, {{ userName }}</h1>
+    <button (click)="logout()" class="logout-button">Logout</button>
+  </div>
+  <hr>
+
+   Pagination for blog articles 
+
+  <div *ngFor="let article of paginatedArticles" class="article">
+    <h3>{{ article.title }}</h3>
+    <p>{{ article.content }}</p>
+  </div>
+
+  <div class="pagination" style="text-align: center; margin-top: 20px;">
+    <button (click)="prevPage()" [disabled]="currentPage === 1">Previous</button>
+    <span>Page {{ currentPage }} of {{ totalPages }}</span>
+    <button (click)="nextPage()" [disabled]="currentPage === totalPages">Next</button>
+  </div>
+</div> -->
+
+
+<div class="centered-container">
+  <hr>
+  <div class="header-container">
+    <h1>Welcome, {{ userName }}</h1>
+    <button class="logout-button" (click)="logout()">Logout</button>
+    <button class="add-blog-button" (click)="openAddBlogForm()">+ Add Blog</button>
+  </div>
+  <hr>
+
+  <!-- Add Blog Form -->
+  <div *ngIf="showAddForm" class="add-blog-form">
+    <form (ngSubmit)="onSubmit()">
+      <label for="title">Title:</label>
+      <input id="title" [(ngModel)]="newBlog.title" name="title" required />
+
+      <label for="content">Content:</label>
+      <textarea id="content" [(ngModel)]="newBlog.content" name="content" required></textarea>
+
+      <label for="file">Upload File (optional):</label>
+      <input id="file" type="file" (change)="onFileSelect($event)" />
+
+      <button type="submit">Submit</button>
+      <button type="button" (click)="cancelAddBlog()">Cancel</button>
+    </form>
+  </div>
+
+  <!-- Blog Articles -->
+  <div *ngFor="let article of paginatedArticles" class="article">
+    <h3>{{ article.title }}</h3>
+    <p>{{ article.content }}</p>
+    <div *ngIf="article.fileUrl">
+      <a [href]="article.fileUrl" target="_blank">View File</a>
+    </div>
+  </div>
+
+  <!-- Pagination -->
+  <div class="pagination">
+    <button (click)="prevPage()" [disabled]="currentPage === 1">Previous</button>
+    <span>Page {{ currentPage }} of {{ totalPages }}</span>
+    <button (click)="nextPage()" [disabled]="currentPage === totalPages">Next</button>
+  </div>
+</div>

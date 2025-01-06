@@ -1,0 +1,27 @@
+<form [formGroup]="registrationForm" (ngSubmit)="onSubmit()" class="registration-form">
+  <label for="firstname">First Name:</label>
+  <input id="firstname" formControlName="firstname" />
+  <div *ngIf="registrationForm.get('firstname')?.invalid && registrationForm.get('firstname')?.touched">
+    First name is required and must be at least 2 characters.
+  </div>
+
+  <label for="lastname">Last Name:</label>
+  <input id="lastname" formControlName="lastname" />
+  <div *ngIf="registrationForm.get('lastname')?.invalid && registrationForm.get('lastname')?.touched">
+    Last name is required and must be at least 2 characters.
+  </div>
+
+  <label for="email">Email:</label>
+  <input id="email" type="email" formControlName="email" />
+  <div *ngIf="registrationForm.get('email')?.invalid && registrationForm.get('email')?.touched">
+    A valid email is required.
+  </div>
+
+  <label for="password">Password:</label>
+  <input id="password" type="password" formControlName="password" />
+  <div *ngIf="registrationForm.get('password')?.invalid && registrationForm.get('password')?.touched">
+    Password must have at least 8 characters, including an uppercase, lowercase, number, and special character.
+  </div>
+
+  <button type="submit" [disabled]="registrationForm.invalid">Register</button>
+</form>
