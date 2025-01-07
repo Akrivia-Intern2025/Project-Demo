@@ -25,26 +25,6 @@ export class LoginComponent implements OnInit {
     });
   }
 
-//   onSubmit() {
-//     if (this.loginForm.valid) {
-//       const loginData = this.loginForm.value;
-      
-//       // Send the login data to the backend
-//       this.http.post('http://localhost:3000/login', loginData).subscribe({
-//         next: (response) => {
-//           console.log('Login successful:', response);
-//           alert('Login successful!');
-//           this.router.navigateByUrl('/dashboard'); 
-//         },
-//         error: (err) => {
-//           console.error('Login failed:', err);
-//           alert('Invalid login credentials. Please try again.');
-//         }
-//       });
-//     } else {
-//       console.log('Form is not valid');
-//     }
-//   }
 
   openRegistrationPage() {
     this.router.navigateByUrl("/registration");
@@ -58,7 +38,7 @@ onSubmit() {
     this.http.post('http://localhost:3000/api/auth/login', loginData).subscribe({
       next: (response: any) => {
         console.log('Login successful:', response);
-        alert('Login successful!');
+        // alert('Login successful!');
         
         // Store token and user info in localStorage
         localStorage.setItem('token', response.token);

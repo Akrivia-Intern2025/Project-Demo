@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-individual-dashboard',
@@ -18,10 +19,11 @@ export class IndividualDashboardComponent implements OnInit {
   newBlog: { title: string; content: string; fileUrl?: string } = { title: '', content: '' }; // New blog data
   uploadedFile: File | null = null; // Store the uploaded file
 
-  constructor(private router: Router) {}
+  constructor(private router: Router, private http: HttpClient) {}
 
   ngOnInit(): void {
     const user = JSON.parse(localStorage.getItem('email') || '{}');
+    console.log(user);
     console.log(localStorage);
 
     // Check if the user is logged in
@@ -153,3 +155,40 @@ export class IndividualDashboardComponent implements OnInit {
     }
   }
 }
+// onFileSelect(event: any) {
+//   this.uploadedFile = event.target.files[0];
+// }
+
+// onSubmit() {
+//   if (this.newBlog.title && this.newBlog.content) {
+//     const newArticle = { ...this.newBlog };
+//     const formData = new FormData();
+//     formData.append('title', this.newBlog.title);
+//     formData.append('content', this.newBlog.content);
+//     console.log(this.newBlog.title, this.newBlog.content);
+
+//     if (this.uploadedFile) {
+//       formData.append('file', this.uploadedFile, this.uploadedFile.name);
+//       newArticle.fileUrl = URL.createObjectURL(this.uploadedFile);
+//       console.log(newArticle);
+       
+      
+//     }
+
+//     this.http.post('http://localhost:3000/upload', formData).subscribe(
+//       (response: any) => {
+//         console.log(this.uploadedFile);
+//         // Simulate adding the blog to the list with file URL if available
+//         const newArticle = { ...this.newBlog, fileUrl: response.filePath };
+//         this.articles.unshift(newArticle); // Add the new article to the top
+//         this.totalPages = Math.ceil(this.articles.length / this.articlesPerPage);
+//         this.updatePaginatedArticles();
+//         this.showAddForm = false; // Hide form after submission
+//       },
+//       (error) => {
+//         console.error('Error uploading file:', error);
+//       }
+//     );
+//   }
+// }
+// }
